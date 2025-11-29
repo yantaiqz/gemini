@@ -65,7 +65,7 @@ COMMON_LEGAL_QUESTIONS = [
 
 # --- 2. 页面配置和模型初始化 ---
 st.set_page_config(page_title="跨境合规专家AI", page_icon="⚖️")
-st.title("👩‍💼 跨境合规Judi，为中国出海企业兜底")
+st.title("👩‍💼 跨境合规Judi：查法规、查外企")
 
 # 获取 API Key
 api_key = st.secrets.get("GEMINI_API_KEY")
@@ -74,7 +74,7 @@ if not api_key:
     st.stop()
 
 genai.configure(api_key=api_key)
-model = genai.GenerativeModel('gemini-2.5-flash-lite')
+model = genai.GenerativeModel('gemini-3-pro-preview')
 
 # 简单的聊天界面
 if "messages" not in st.session_state:
@@ -84,7 +84,7 @@ if "messages" not in st.session_state:
 
 # 检查是否有按钮被点击
 prompt_from_button = None
-st.subheader("⚖️ 常见法律问题快速咨询")
+st.subheader("⚖️ 常见合规问题和外企资质快速查询")
 col1, col2, col3 = st.columns(3)
 
 with col1:
