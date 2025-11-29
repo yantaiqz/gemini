@@ -80,11 +80,6 @@ if user_input:
     st.session_state.messages.append({"role": "user", "content": user_input})
     
     # 调用 Gemini
-    with st.chat_message("assistant"):
-        response = model.generate_content(user_input, stream=True)
-        # 流式输出
-        full_response = st.write_stream(response)
-        
-        # 保存模型回复到历史
-        st.session_state.messages.append({"role": "assistant", "content": full_response})
-        
+    response = model.generate_content(user_input)
+    st.chat_message("assistant").write(response.text)
+    st.session_state.messages.append({"role": "assistant", "content": response.text})
