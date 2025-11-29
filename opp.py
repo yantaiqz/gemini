@@ -74,7 +74,7 @@ if not api_key:
     st.stop()
 
 genai.configure(api_key=api_key)
-model = genai.GenerativeModel('gemini-2.5-pro-preview-03-25')
+model = genai.GenerativeModel('gemini-2.5-flash')
 
 # 简单的聊天界面
 if "messages" not in st.session_state:
