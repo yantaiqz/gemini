@@ -87,7 +87,7 @@ if "messages" not in st.session_state:
 # 检查是否有按钮被点击
 prompt_from_button = None
 st.subheader("⚖️ 常见合规问题和外企资质快速查询")
-col1, col2, col3 = st.columns(3)
+col1, col2, col3 , col4, col5 = st.columns(5)
 
 with col1:
     if st.button("美国亚马逊被法院TRO怎么办？", use_container_width=True):
@@ -98,7 +98,12 @@ with col2:
 with col3:
     if st.button("汽车出口欧洲如何实现数据合规？", use_container_width=True):
         prompt_from_button = COMMON_LEGAL_QUESTIONS[2]
-
+with col4:
+    if st.button("巴西比亚迪的征信情况", use_container_width=True):
+        prompt_from_button = COMMON_LEGAL_QUESTIONS[3]
+with col5:
+    if st.button("阿布扎比国家石油公司的账期多久比较安全", use_container_width=True):
+        prompt_from_button = COMMON_LEGAL_QUESTIONS[4]
 
 # --- 4. 核心聊天逻辑 ---
 
