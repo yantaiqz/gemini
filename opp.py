@@ -37,9 +37,12 @@ if not api_key:
     st.stop()
 
 genai.configure(api_key=api_key)
-model = genai.GenerativeModel('gemini-2.5-flash-lite')
+model = genai.GenerativeModel('gemini-2.5-flash-lite',system_instruction=SYSTEM_INSTRUCTION)
 
-
+# 简单的聊天界面
+if "messages" not in st.session_state:
+    st.session_state.messages = []
+    
 # --- 3. 常见问题按钮逻辑 ---
 
 # 检查是否有按钮被点击
