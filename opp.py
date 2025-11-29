@@ -137,10 +137,11 @@ if user_input:
         with st.chat_message("assistant", avatar=ASSISTANT_ICON):
             # 使用 stream=True 实现流式输出，提升用户体验
             response = model.generate_content(user_input, stream=True)
-            full_response = st.write_stream(response)
+            # full_response = st.write_stream(response)
+            st.write_stream(response)
             
             # 保存回复到历史
-            st.session_state.messages.append({"role": "assistant", "content": full_response})
+            # st.session_state.messages.append({"role": "assistant", "content": full_response})
     except Exception as e:
         # 捕捉可能出现的 ResourceExhausted 或 NotFound 错误
         st.error(f"发生错误: {e}")
