@@ -34,7 +34,7 @@ genai.configure(api_key=api_key)
 
 # 使用最新的推荐模型，并应用律师角色系统指令
 model = genai.GenerativeModel(
-    model_name='gemini-1.5-flash', # 更稳定、更快的模型
+    model_name='gemini-2.5-flash', # 更稳定、更快的模型
     system_instruction=SYSTEM_INSTRUCTION
 )
 
