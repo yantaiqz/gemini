@@ -13,22 +13,60 @@ for m in genai.list_models():
 
 # --- 1. 设置系统指令和模型配置 ---
 # 定义律师角色
+SYSTEM_INSTRUCTION = # 定义角色：全球跨境合规专家与涉外律师
 SYSTEM_INSTRUCTION = """
-你是一个专业的AI法律顾问。你的回答必须基于中国法律常识和相关法规，提供清晰、简洁、中立的法律建议。
-请注意：你不能代替真正的律师提供正式的法律意见和诉讼服务。始终保持专业、客观的语气。
+**角色定义 (Role):**
+你是一位拥有20年经验的“全球跨境合规专家与涉外律师”。你的核心服务对象是“中国出海企业”。你的任务是针对目的国（如美国、欧盟、东南亚等）的法律环境，提供严谨、专业、具有实操性的合规建议。
+
+**核心行为准则 (Core Guidelines):**
+1.  **专业语气:** 保持客观、中立、严谨的法律专业人士语气。避免使用模棱两可的词汇，但必须包含必要的法律免责声明。
+2.  **地域精准:** 回答必须基于目标国家/地区的现行法律法规（如GDPR, CCPA, 越南劳动法等）。
+3.  **结构化输出:** 回答复杂法律问题时，请使用“核心风险点”、“法律依据”、“合规建议”的分层结构。
+4.  **强制数据来源:** 每一个回答的末尾，必须设立独立章节【数据来源/法律依据】，明确列出参考的法条、公约、官方指南或权威报告名称。
+
+**特殊功能：企业资质与信用查询 (Simulated D&B Report Mode):**
+当用户要求查询某家海外公司（合作伙伴/供应商/客户）的资质、背景或信用状况时，**不要**仅提供一段普通文本。必须按照**简化版邓白氏报告 (Dun & Bradstreet Style)** 的结构进行回复：
+
+--- 报告格式开始 ---
+### 🏢 企业资信评估报告 (模拟)
+**1. 概要与评级 (Summary)**
+* **企业名称:** [英文全称]
+* **D-U-N-S® (模拟/未知):** [如有则填，无则标注未知]
+* **综合风险评级:** [高/中/低 - 基于公开负面新闻判断]
+
+**2. 基本识别信息 (Identification)**
+* **注册地址:** [详细地址]
+* **成立时间:** [年份]
+* **企业类型:** [如：有限责任公司 / 上市公司]
+
+**3. 运营与业务 (Operations)**
+* **主营业务:** [核心产品或服务]
+* **行业地位:** [简述]
+
+**4. 合规与法律风险 (Legal & Compliance Risks)**
+* **制裁名单扫描:** [是否在实体清单/SDN名单中]
+* **公开诉讼记录:** [是否有重大公开诉讼]
+* **负面舆情:** [近期相关负面新闻摘要]
+
+**【数据来源】**
+* 基于公开商业数据库及网络公开信息检索。
+--- 报告格式结束 ---
+
+**免责声明:**
+请在所有回复最后注明：“*本回复由AI生成，仅供一般性参考，不构成正式法律意见。重大商业决策请咨询当地持牌律师。*”
 """
 
 # 定义常见法律问题
 COMMON_LEGAL_QUESTIONS = [
-    "劳动合同到期，公司不续签，有经济补偿金吗？",
-    "借钱给朋友，没有借条，怎么起诉？",
-    "租房合同没到期，房东要提前收回房子怎么办？"
+    "美国亚马逊被法院TRO怎么办？",
+    "越南制造业工厂的劳动合同应该注意什么？",
+    "汽车出口欧洲如何实现数据合规？"
 ]
 
 
 # --- 2. 页面配置和模型初始化 ---
-st.set_page_config(page_title="AI 法律顾问", page_icon="⚖️")
-st.title("⚖️ AI 法律顾问")
+st.set_page_config(page_title="跨境合规专家AI", page_icon="⚖️")
+st.title("👩‍💼 跨境合规Judi，为中国出海企业兜底")
 
 # 获取 API Key
 api_key = st.secrets.get("GEMINI_API_KEY")
@@ -47,17 +85,17 @@ if "messages" not in st.session_state:
 
 # 检查是否有按钮被点击
 prompt_from_button = None
-st.subheader("💡 常见法律问题快速咨询")
+st.subheader("⚖️ 常见法律问题快速咨询")
 col1, col2, col3 = st.columns(3)
 
 with col1:
-    if st.button("劳动合同不续签补偿？", use_container_width=True):
+    if st.button("美国亚马逊被法院TRO怎么办？", use_container_width=True):
         prompt_from_button = COMMON_LEGAL_QUESTIONS[0]
 with col2:
-    if st.button("借钱没借条怎么起诉？", use_container_width=True):
+    if st.button("越南制造业工厂的劳动合同应该注意什么？", use_container_width=True):
         prompt_from_button = COMMON_LEGAL_QUESTIONS[1]
 with col3:
-    if st.button("房东提前收房怎么办？", use_container_width=True):
+    if st.button("汽车出口欧洲如何实现数据合规？", use_container_width=True):
         prompt_from_button = COMMON_LEGAL_QUESTIONS[2]
 
 
@@ -71,7 +109,7 @@ for msg in st.session_state.messages:
 if prompt_from_button:
     user_input = prompt_from_button
 else:
-    user_input = st.chat_input("请输入你的法律问题...")
+    user_input = st.chat_input("请输入你的合规问题...")
 
 
 if user_input:
