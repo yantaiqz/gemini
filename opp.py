@@ -1,6 +1,17 @@
 import streamlit as st
 import google.generativeai as genai
 
+import os
+
+# 确保配置了 API KEY
+# genai.configure(api_key=os.environ["GOOGLE_API_KEY"]) 
+
+print("正在列出可用模型...")
+for m in genai.list_models():
+    if 'generateContent' in m.supported_generation_methods:
+        print(m.name)
+
+
 st.title("我的 Gemini 助手")
 
 # 获取 API Key
