@@ -104,7 +104,6 @@ with col5:
         prompt_from_button = COMMON_LEGAL_QUESTIONS[4]
 
 # --- 4. 核心聊天逻辑 ---
-
 # 显示历史消息
 for msg in st.session_state.messages:
     st.chat_message(msg["role"]).write(msg["content"])
@@ -112,6 +111,8 @@ for msg in st.session_state.messages:
 # 确定本次的输入是什么
 if prompt_from_button:
     user_input = prompt_from_button
+else
+    user_input = st.chat_input("请输入你的合规问题...")
 
 if user_input:
     # 显示用户消息
@@ -123,4 +124,4 @@ if user_input:
     st.chat_message("assistant", avatar="👩‍💼").write(response.text)
     st.session_state.messages.append({"role": "assistant", "content": response.text})
 
-user_input = st.chat_input("请输入你的合规问题...")
+
