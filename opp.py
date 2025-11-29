@@ -103,25 +103,45 @@ with col5:
     if st.button("阿布扎比国家石油公司的账期多久比较安全", use_container_width=True):
         prompt_from_button = COMMON_LEGAL_QUESTIONS[4]
 
-# --- 4. 核心聊天逻辑 ---
-# 显示历史消息
-for msg in st.session_state.messages:
-    st.chat_message(msg["role"]).write(msg["content"])
+# --- 4. 核心聊天逻辑 (已修正) ---
 
-# 确定本次的输入是什么
+# 定义头像常量，确保一致性
+USER_ICON = "👤"
+ASSISTANT_ICON = "👩‍💼"
+
+# 1. 显示历史消息 (修正：添加头像参数)
+for msg in st.session_state.messages:
+    icon = USER_ICON if msg["role"] == "user" else ASSISTANT_ICON
+    st.chat_message(msg["role"], avatar=icon).write(msg["content"])
+
+# 2. 【关键修正】将 chat_input 提到前面，确保它始终渲染
+chat_input_text = st.chat_input("请输入你的合规问题...")
+
+# 3. 确定本次的输入是什么 (合并来源)
+# 注意：prompt_from_button 应该在 app.py 的顶部被定义和赋值
 if prompt_from_button:
     user_input = prompt_from_button
-else
-    user_input = st.chat_input("请输入你的合规问题...")
+elif chat_input_text:
+    user_input = chat_input_text
+else:
+    user_input = None
 
+# 4. 处理输入
 if user_input:
     # 显示用户消息
-    st.chat_message("user",  avatar="👤").write(user_input)
+    st.chat_message("user", avatar=USER_ICON).write(user_input)
     st.session_state.messages.append({"role": "user", "content": user_input})
     
-    # 调用 Gemini
-    response = model.generate_content(user_input)
-    st.chat_message("assistant", avatar="👩‍💼").write(response.text)
-    st.session_state.messages.append({"role": "assistant", "content": response.text})
-
+    # 调用 Gemini (修正：使用流式输出，并添加错误捕捉)
+    try:
+        with st.chat_message("assistant", avatar=ASSISTANT_ICON):
+            # 使用 stream=True 实现流式输出，提升用户体验
+            response = model.generate_content(user_input, stream=True)
+            full_response = st.write_stream(response)
+            
+            # 保存回复到历史
+            st.session_state.messages.append({"role": "assistant", "content": full_response})
+    except Exception as e:
+        # 捕捉可能出现的 ResourceExhausted 或 NotFound 错误
+        st.error(f"发生错误: {e}")
 
