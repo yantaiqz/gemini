@@ -174,13 +174,17 @@ if uploaded_file and st.button("立即启动风险审查", key="review_start_btn
             # 2. 调用模型 (流式输出)
             response_stream = model.generate_content(prompt_parts, stream=True)
             
-            # ... (后续的 st.write_stream 和保存历史代码不变) ...
-
+            # 显示并记录助手的流式响应
             with st.chat_message("assistant", avatar="👩‍💼"):
-                full_review = st.write_stream(response_stream)
+                message_placeholder = st.empty()
+                full_review = ""
                 
-                # 保存到 Session State (修正用户消息以保持结构清晰)
-                st.session_state.messages.append({"role": "user", "content": f"合同审查请求: {file_name}"})
+                for chunk in response_stream:
+                    if chunk.text:
+                        full_review += chunk.text
+                        message_placeholder.markdown(full_review + "▌")
+                
+                message_placeholder.markdown(full_review)
                 st.session_state.messages.append({"role": "assistant", "content": full_review})
                 
         st.success("合同审查完成！")
