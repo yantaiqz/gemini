@@ -2,14 +2,14 @@ import streamlit as st
 import google.generativeai as genai
 # import os # 不再需要，已删除
 
-hide_streamlit_ui = """
-<style>
-#MainMenu {visibility: hidden;} /* 隐藏三条杠菜单 */
-footer {visibility: hidden;}    /* 隐藏底部的 “Made with Streamlit” */
-header {visibility: hidden;}    /* 隐藏顶部工具栏 (包括 Rerun 按钮) */
-</style>
-"""
-st.markdown(hide_streamlit_ui, unsafe_allow_html=True)
+# hide_streamlit_ui = """
+# <style>
+#  #MainMenu {visibility: hidden;} /* 隐藏三条杠菜单 */
+# footer {visibility: hidden;}    /* 隐藏底部的 “Made with Streamlit” */
+# header {visibility: hidden;}    /* 隐藏顶部工具栏 (包括 Rerun 按钮) */
+# </style>
+# """
+# st.markdown(hide_streamlit_ui, unsafe_allow_html=True)
 
 
 # -------------------------------------------------------------
