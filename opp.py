@@ -86,6 +86,37 @@ RISK_ANALYSIS_PROMPT = """
 st.set_page_config(page_title="跨境合规专家AI", page_icon="⚖️")
 st.title("跨境合规Judi：查法规、查外企、审合同")
 
+# 确保您的聊天历史初始化代码已更新，以便 clear_chat_history 函数可以正常工作。
+# ... (您的 if "messages" not in st.session_state: 应该和 clear_chat_history 内容保持一致)
+
+# 移除 model listing 逻辑 (仅用于调试，影响生产性能)
+# print("正在列出可用模型...") ... (已移除) ...
+
+# 1. API Key 获取与配置
+api_key = st.secrets.get("GEMINI_API_KEY")
+if not api_key:
+    st.error("请配置 API Key")
+    st.stop()
+genai.configure(api_key=api_key)
+
+# 2. 缓存模型初始化（关键性能优化）
+@st.cache_resource(show_spinner="正在建立Judi的专业知识库...")
+def initialize_model():
+    # 修正模型：升级到 gemini-2.5-flash 以提高可靠性
+    # 修正 Token 限制：显式设置高 Token 限制
+    generation_config = {
+        "max_output_tokens": 4096 
+    }
+    
+    model = genai.GenerativeModel(
+        model_name='gemini-2.5-pro', 
+        system_instruction=SYSTEM_INSTRUCTION,
+        generation_config=generation_config
+    )
+    return model
+
+model = initialize_model()
+
 
 
 # 注入一个带有自定义样式的虚线
@@ -154,39 +185,6 @@ st.markdown(
     '<hr style="border-top: 2px dashed #8c8c8c; background: none;">', 
     unsafe_allow_html=True
 )
-
-
-
-# 确保您的聊天历史初始化代码已更新，以便 clear_chat_history 函数可以正常工作。
-# ... (您的 if "messages" not in st.session_state: 应该和 clear_chat_history 内容保持一致)
-
-# 移除 model listing 逻辑 (仅用于调试，影响生产性能)
-# print("正在列出可用模型...") ... (已移除) ...
-
-# 1. API Key 获取与配置
-api_key = st.secrets.get("GEMINI_API_KEY")
-if not api_key:
-    st.error("请配置 API Key")
-    st.stop()
-genai.configure(api_key=api_key)
-
-# 2. 缓存模型初始化（关键性能优化）
-@st.cache_resource(show_spinner="正在建立Judi的专业知识库...")
-def initialize_model():
-    # 修正模型：升级到 gemini-2.5-flash 以提高可靠性
-    # 修正 Token 限制：显式设置高 Token 限制
-    generation_config = {
-        "max_output_tokens": 4096 
-    }
-    
-    model = genai.GenerativeModel(
-        model_name='gemini-2.5-pro', 
-        system_instruction=SYSTEM_INSTRUCTION,
-        generation_config=generation_config
-    )
-    return model
-
-model = initialize_model()
 
 
 # 3. 聊天历史初始化（添加欢迎语）
