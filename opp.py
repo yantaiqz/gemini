@@ -71,7 +71,7 @@ SYSTEM_INSTRUCTION = """
 # -------------------------------------------------------------
 
 st.set_page_config(page_title="跨境合规专家AI", page_icon="⚖️")
-st.title("👩‍💼 跨境合规Judi：查法规、查外企")
+st.title("跨境合规Judi：查法规、查外企")
 
 # 移除 model listing 逻辑 (仅用于调试，影响生产性能)
 # print("正在列出可用模型...") ... (已移除) ...
