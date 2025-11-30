@@ -55,9 +55,11 @@ SYSTEM_INSTRUCTION = """
 
 # 定义常见法律问题
 COMMON_LEGAL_QUESTIONS = [
-    "劳动合同到期，公司不续签，有经济补偿金吗？",
-    "借钱给朋友，没有借条，怎么起诉？",
-    "租房合同没到期，房东要提前收回房子怎么办？"
+    "美国亚马逊被法院TRO怎么办？",
+    "越南制造业工厂的劳动合同应该注意什么？",
+    "汽车出口欧洲如何实现数据合规？",
+     "巴西比亚迪的征信情况",
+     "阿布扎比国家石油公司的账期多久比较安全"
 ]
 
 
@@ -80,21 +82,27 @@ if "messages" not in st.session_state:
     
 # --- 3. 常见问题按钮逻辑 ---
 
+
 # 检查是否有按钮被点击
 prompt_from_button = None
-st.subheader("💡 常见法律问题快速咨询")
-col1, col2, col3 = st.columns(3)
+st.subheader("⚖️ 常见合规问题和外企资质快速查询")
+col1, col2, col3 , col4, col5 = st.columns(5)
 
 with col1:
-    if st.button("劳动合同不续签补偿？", use_container_width=True):
+    if st.button("美国亚马逊被法院TRO怎么办？", use_container_width=True):
         prompt_from_button = COMMON_LEGAL_QUESTIONS[0]
 with col2:
-    if st.button("借钱没借条怎么起诉？", use_container_width=True):
+    if st.button("越南制造业工厂的劳动合同应该注意什么？", use_container_width=True):
         prompt_from_button = COMMON_LEGAL_QUESTIONS[1]
 with col3:
-    if st.button("房东提前收房怎么办？", use_container_width=True):
+    if st.button("汽车出口欧洲如何实现数据合规？", use_container_width=True):
         prompt_from_button = COMMON_LEGAL_QUESTIONS[2]
-
+with col4:
+    if st.button("巴西比亚迪的征信情况", use_container_width=True):
+        prompt_from_button = COMMON_LEGAL_QUESTIONS[3]
+with col5:
+    if st.button("阿布扎比国家石油公司的账期多久比较安全", use_container_width=True):
+        prompt_from_button = COMMON_LEGAL_QUESTIONS[4]
 
 # --- 4. 核心聊天逻辑 ---
 
