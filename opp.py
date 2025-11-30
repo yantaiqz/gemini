@@ -148,39 +148,45 @@ uploaded_file = st.file_uploader(
 )
 
 # 确保模型定义在前面被正确调用（已在您的代码中实现）
-# model = initialize_model() 
-
 if uploaded_file and st.button("立即启动风险审查", key="review_start_btn"):
     
-    # 将文件对象发送给 Streamlit
-    st.chat_message("user", avatar="👤").write(f"已上传文件: {uploaded_file.name}，文件大小: {uploaded_file.size} 字节。正在请求风险审查。")
+    # 提取核心数据
+    file_bytes = uploaded_file.getvalue()
+    mime_type = uploaded_file.type
+    file_name = uploaded_file.name
+
+    st.chat_message("user", avatar="👤").write(f"已上传文件: {file_name}，正在请求风险审查。")
 
     try:
-        # 使用 st.spinner 改善等待体验
-        with st.spinner(f"正在分析 {uploaded_file.name} 的 {uploaded_file.size} 字节文件，请稍候..."):
+        with st.spinner(f"正在分析 {file_name} 的 {len(file_bytes)} 字节文件..."):
             
-            # 1. 构造 Prompt Parts (文件 + 指令)
-            # Gemini SDK 可以直接处理 uploaded_file 对象
+            # 1. 构造 Prompt Parts (核心修正在这里！)
             prompt_parts = [
                 RISK_ANALYSIS_PROMPT,
-                uploaded_file  # 直接传递 Streamlit 的 UploadedFile 对象
+                {
+                    # 告知 Gemini 文件的 MIME 类型
+                    "mime_type": mime_type,
+                    # 传入文件的原始字节数据
+                    "data": file_bytes 
+                }
             ]
 
             # 2. 调用模型 (流式输出)
             response_stream = model.generate_content(prompt_parts, stream=True)
             
-            # 3. 显示结果并保存历史
+            # ... (后续的 st.write_stream 和保存历史代码不变) ...
+
             with st.chat_message("assistant", avatar="👩‍💼"):
                 full_review = st.write_stream(response_stream)
                 
-                # 保存到 Session State
-                st.session_state.messages.append({"role": "user", "content": f"合同审查请求: {uploaded_file.name}"})
+                # 保存到 Session State (修正用户消息以保持结构清晰)
+                st.session_state.messages.append({"role": "user", "content": f"合同审查请求: {file_name}"})
                 st.session_state.messages.append({"role": "assistant", "content": full_review})
                 
         st.success("合同审查完成！")
 
     except Exception as e:
-        st.error(f"合同分析失败，请检查文件格式或API状态。错误详情: {e}")
+        st.error(f"处理文件或API调用失败。错误详情: {e}")
 
 
 
