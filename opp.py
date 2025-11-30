@@ -114,7 +114,7 @@ if user_input:
             full_response = st.write_stream(response)
             
             # 保存回复到历史
-            st.session_state.messages.append({"role": "assistant", "content": full_response})
+            # st.session_state.messages.append({"role": "assistant", "content": full_response})
     except Exception as e:
         # 捕捉可能出现的 ResourceExhausted 或 NotFound 错误
         st.error(f"发生错误: {e}")
