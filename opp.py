@@ -1,5 +1,8 @@
 import streamlit as st
 import google.generativeai as genai
+import io 
+import tempfile # 用于创建临时文件路径
+
 # import os # 不再需要，已删除
 
 # hide_streamlit_ui = """
@@ -10,6 +13,19 @@ import google.generativeai as genai
 # </style>
 # """
 # st.markdown(hide_streamlit_ui, unsafe_allow_html=True)
+
+# 注入 CSS 来定义虚线边框样式
+BOX_STYLE_CSS = """
+<style>
+.dashed-border-box {
+    border: 2px dashed #999999; /* 灰色虚线边框 */
+    padding: 20px;
+    border-radius: 10px; /* 轻微圆角 */
+    margin-bottom: 20px;
+}
+</style>
+"""
+st.markdown(BOX_STYLE_CSS, unsafe_allow_html=True)
 
 
 # -------------------------------------------------------------
@@ -82,7 +98,7 @@ RISK_ANALYSIS_PROMPT = """
 # -------------------------------------------------------------
 
 st.set_page_config(page_title="跨境合规专家AI", page_icon="⚖️")
-st.title("跨境合规Judi：查法规、查外企")
+st.title("跨境合规Judi：查法规、查外企、审合同")
 
 # --- 清空历史记录的函数 ---
 def clear_chat_history():
@@ -138,7 +154,7 @@ if "messages" not in st.session_state:
 # --- 3. 常见问题按钮逻辑 (优化布局) ---
 
 prompt_from_button = None
-st.subheader("⚖️ 常见合规问题和外企资质快速查询")
+st.subheader("常见合规问题和外企资质快速查询")
 
 # 优化为 3 列布局，更好地适应移动端
 cols = st.columns(3)
@@ -150,64 +166,66 @@ for i, question in enumerate(COMMON_LEGAL_QUESTIONS):
             prompt_from_button = question
 
 
-
-import io 
-import tempfile # 用于创建临时文件路径
-
-# --- 合同风险审核工具 ---
-st.subheader("📄 合同文件风险审核")
-
-uploaded_file = st.file_uploader(
-    "上传合同文件", 
-    type=['pdf', 'docx', 'txt'], # 定义支持的文件类型
-    help="Gemini 可以直接读取 PDF 和文本文件进行分析"
-)
-
-# 确保模型定义在前面被正确调用（已在您的代码中实现）
-if uploaded_file and st.button("立即启动风险审查", key="review_start_btn"):
+# 使用 st.container 来组织内容
+with st.container():
+    # 开启虚线边框 DIV
+    st.markdown('<div class="dashed-border-box">', unsafe_allow_html=True)
+        
+    # --- 合同风险审核工具 ---
+    st.subheader("合同文件风险审核")
     
-    # 提取核心数据
-    file_bytes = uploaded_file.getvalue()
-    mime_type = uploaded_file.type
-    file_name = uploaded_file.name
-
-    st.chat_message("user", avatar="👤").write(f"已上传文件: {file_name}，正在请求风险审查。")
-
-    try:
-        with st.spinner(f"正在分析 {file_name} 的 {len(file_bytes)} 字节文件..."):
-            
-            # 1. 构造 Prompt Parts (核心修正在这里！)
-            prompt_parts = [
-                RISK_ANALYSIS_PROMPT,
-                {
-                    # 告知 Gemini 文件的 MIME 类型
-                    "mime_type": mime_type,
-                    # 传入文件的原始字节数据
-                    "data": file_bytes 
-                }
-            ]
-
-            # 2. 调用模型 (流式输出)
-            response_stream = model.generate_content(prompt_parts, stream=True)
-            
-            # 显示并记录助手的流式响应
-            with st.chat_message("assistant", avatar="👩‍💼"):
-                message_placeholder = st.empty()
-                full_review = ""
+    uploaded_file = st.file_uploader(
+        "上传合同文件", 
+        type=['pdf', 'docx', 'txt'], # 定义支持的文件类型
+        help="Gemini 可以直接读取 PDF 和文本文件进行分析"
+    )
+    
+    # 确保模型定义在前面被正确调用（已在您的代码中实现）
+    if uploaded_file and st.button("立即启动风险审查", key="review_start_btn"):
+        
+        # 提取核心数据
+        file_bytes = uploaded_file.getvalue()
+        mime_type = uploaded_file.type
+        file_name = uploaded_file.name
+    
+        st.chat_message("user", avatar="👤").write(f"已上传文件: {file_name}，正在请求风险审查。")
+    
+        try:
+            with st.spinner(f"正在分析 {file_name} 的 {len(file_bytes)} 字节文件..."):
                 
-                for chunk in response_stream:
-                    if chunk.text:
-                        full_review += chunk.text
-                        message_placeholder.markdown(full_review + "▌")
+                # 1. 构造 Prompt Parts (核心修正在这里！)
+                prompt_parts = [
+                    RISK_ANALYSIS_PROMPT,
+                    {
+                        # 告知 Gemini 文件的 MIME 类型
+                        "mime_type": mime_type,
+                        # 传入文件的原始字节数据
+                        "data": file_bytes 
+                    }
+                ]
+    
+                # 2. 调用模型 (流式输出)
+                response_stream = model.generate_content(prompt_parts, stream=True)
                 
-                message_placeholder.markdown(full_review)
-                st.session_state.messages.append({"role": "assistant", "content": full_review})
-                
-        st.success("合同审查完成！")
+                # 显示并记录助手的流式响应
+                with st.chat_message("assistant", avatar="👩‍💼"):
+                    message_placeholder = st.empty()
+                    full_review = ""
+                    
+                    for chunk in response_stream:
+                        if chunk.text:
+                            full_review += chunk.text
+                            message_placeholder.markdown(full_review + "▌")
+                    
+                    message_placeholder.markdown(full_review)
+                    st.session_state.messages.append({"role": "assistant", "content": full_review})
+                    
+            st.success("合同审查完成！")
+    
+        except Exception as e:
+            st.error(f"处理文件或API调用失败。错误详情: {e}")
 
-    except Exception as e:
-        st.error(f"处理文件或API调用失败。错误详情: {e}")
-
+    st.markdown('</div>', unsafe_allow_html=True)
 
 
 # --- 4. 核心聊天逻辑 ---
