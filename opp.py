@@ -143,7 +143,7 @@ if user_input:
         #st.session_state.messages.append({"role": "assistant", "content":full_response})
 
         with st.chat_message("assistant", avatar=ASSISTANT_ICON):
-            response = model.generate_content(user_input, stream=True)
+            response = model.generate_content(user_input)
             full_response = st.write_stream(response) 
             st.session_state.messages.append({"role": "assistant", "content": full_response})
 
