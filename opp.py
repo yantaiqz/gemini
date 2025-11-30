@@ -67,11 +67,18 @@ with col3:
 for msg in st.session_state.messages:
     st.chat_message(msg["role"]).write(msg["content"])
 
-# 确定本次的输入是什么
+chat_input_text = st.chat_input("请输入你的法律问题...")
+
+# 2. 确定本次的有效输入是什么 (合并来源)
 if prompt_from_button:
+    # 如果用户点击了按钮，则使用按钮的内容
     user_input = prompt_from_button
+elif chat_input_text:
+    # 如果用户在输入框中输入了内容，则使用输入框的内容
+    user_input = chat_input_text
 else:
-    user_input = st.chat_input("请输入你的法律问题...")
+    # 否则，没有有效的输入，确保 user_input 被定义
+    user_input = None
 
 
 if user_input:
