@@ -76,7 +76,7 @@ generation_config = {
 }
 genai.configure(api_key=api_key)
 model = genai.GenerativeModel(
-    'gemini-2.5-flash',
+    'gemini-1.5-flash',
     generation_config=generation_config
 )
 
