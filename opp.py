@@ -158,10 +158,10 @@ st.markdown(
 )
 
 # --- 合同风险审核工具 ---
-st.subheader("合同文件风险审核")
+# st.subheader("合同文件风险审核")
 
 uploaded_file = st.file_uploader(
-    "上传合同文件", 
+    "合同文件风险审核", 
     type=['pdf', 'docx', 'txt'], # 定义支持的文件类型
     help="Gemini 可以直接读取 PDF 和文本文件进行分析"
 )
