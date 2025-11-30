@@ -6,11 +6,6 @@ import os
 # 确保配置了 API KEY
 # genai.configure(api_key=os.environ["GOOGLE_API_KEY"]) 
 
-print("正在列出可用模型...")
-for m in genai.list_models():
-    if 'generateContent' in m.supported_generation_methods:
-        print(m.name)
-
 # --- 1. 设置系统指令和模型配置 ---
 # 定义律师角色
 SYSTEM_INSTRUCTION = """
