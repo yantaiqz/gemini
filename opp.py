@@ -140,7 +140,7 @@ if user_input:
     try:
         with st.chat_message("assistant", avatar=ASSISTANT_ICON):
             # 修正：使用 stream=True 实现流式输出，解决 UI 卡顿问题
-            response = model.generate_content(user_input, stream=True)
+            response = model.generate_content(user_input)
             full_response = st.write_stream(response)
             
             # 保存回复到历史
