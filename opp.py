@@ -138,9 +138,9 @@ if user_input:
     
     # 4. 调用 Gemini (修正：使用流式输出，并添加错误捕捉)
     #try:
-        response = model.generate_content(user_input, stream=True)
-        full_response=st.chat_message("assistant", avatar=ASSISTANT_ICON).write_stream(response.text)
-        st.session_state.messages.append({"role": "assistant", "content":full_response})
+    response = model.generate_content(user_input, stream=True)
+    full_response=st.chat_message("assistant", avatar=ASSISTANT_ICON).write_stream(response.text)
+    st.session_state.messages.append({"role": "assistant", "content":full_response})
     #except Exception as e:
         # 捕捉可能出现的 ResourceExhausted 或 NotFound 错误
      #   st.error(f"发生错误: 调用Gemini API失败。请检查API Key配额。详细信息: {e}")
