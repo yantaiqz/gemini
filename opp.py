@@ -83,7 +83,7 @@ def initialize_model():
     }
     
     model = genai.GenerativeModel(
-        model_name='gemini-3.5-pro', 
+        model_name='gemini-2.5-pro', 
         system_instruction=SYSTEM_INSTRUCTION,
         generation_config=generation_config
     )
