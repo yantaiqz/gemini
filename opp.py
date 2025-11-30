@@ -24,8 +24,8 @@ SYSTEM_INSTRUCTION = """
 3.  **结构化输出:** 回答复杂法律问题时，请使用“核心风险点”、“法律依据”、“合规建议”的分层结构。
 4.  **强制数据来源:** 每一个回答的末尾，必须设立独立章节【数据来源/法律依据】，明确列出参考的法条、公约、官方指南或权威报告名称。
 
---- 报告格式开始 ---
-### 🏢 企业资信评估报告 (模拟)
+--- 企业资质与信用查询 ---
+### 企业资信评估报告
 **1. 概要与评级 (Summary)**
 * **企业名称:** [英文全称]
 * **D-U-N-S® (模拟/未知):** [如有则填，无则标注未知]
@@ -64,8 +64,8 @@ COMMON_LEGAL_QUESTIONS = [
 
 
 # --- 2. 页面配置和模型初始化 ---
-st.set_page_config(page_title="AI 法律顾问", page_icon="⚖️")
-st.title("⚖️ AI 法律顾问")
+st.set_page_config(page_title="跨境合规专家AI", page_icon="⚖️")
+st.title("👩‍💼 跨境合规Judi：查法规、查外企")
 
 # 获取 API Key
 api_key = st.secrets.get("GEMINI_API_KEY")
