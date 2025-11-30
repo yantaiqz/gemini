@@ -144,7 +144,7 @@ if user_input:
 
         with st.chat_message("assistant", avatar=ASSISTANT_ICON):
             response = model.generate_content(user_input)
-            full_response = st.write_stream(response) 
+            full_response = st.write(response) 
             st.session_state.messages.append({"role": "assistant", "content": full_response})
 
     except Exception as e:
