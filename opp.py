@@ -138,15 +138,23 @@ if user_input:
     
     # 4. 调用 Gemini (修正：使用流式输出，并添加错误捕捉)
     try:
-        #response = model.generate_content(user_input, stream=True)
-        #full_response=st.chat_message("assistant", avatar=ASSISTANT_ICON).write_stream(response.text)
-        #st.session_state.messages.append({"role": "assistant", "content":full_response})
 
         with st.chat_message("assistant", avatar=ASSISTANT_ICON):
-            response = model.generate_content(user_input)
-            st.chat_message("assistant", avatar=ASSISTANT_ICON).write(response.text)
-            st.session_state.messages.append({"role": "assistant", "content": response.text})
-
+        # 创建一个空的占位符来动态更新内容
+            message_placeholder = st.empty()
+            full_response = ""
+            
+        # 调用模型的流式接口
+        for chunk in model.generate_content(user_input, stream=True):
+            # 将每个块的内容追加到完整响应中
+            full_response += chunk.text if chunk.text else ""
+            # 更新占位符内容，末尾加一个光标效果
+            message_placeholder.markdown(full_response + "▌")
+        
+        # 流式结束后，用最终内容替换占位符，去掉光标
+        message_placeholder.markdown(full_response)
+        st.session_state.messages.append({"role": "assistant", "content": full_response})
+    
     except Exception as e:
         # 捕捉可能出现的 ResourceExhausted 或 NotFound 错误
         st.error(f"发生错误: 调用Gemini API失败。请检查API Key配额。详细信息: {e}")
