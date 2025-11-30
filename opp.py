@@ -123,12 +123,22 @@ else:
     # 否则，没有有效的输入，确保 user_input 被定义
     user_input = None
 
+# 定义头像常量，确保一致性
+USER_ICON = "👤"
+ASSISTANT_ICON = "👩‍💼"
+
 if user_input:
-    # 显示用户消息
-    st.chat_message("user").write(user_input)
+    # 1. 显示用户消息 (修正：添加头像)
+    st.chat_message("user", avatar=USER_ICON).write(user_input)
     st.session_state.messages.append({"role": "user", "content": user_input})
     
-    # 调用 Gemini
-    response = model.generate_content(user_input)
-    st.chat_message("assistant").write(response.text)
-    st.session_state.messages.append({"role": "assistant", "content": response.text})
+    # 2. 调用 Gemini (修正：使用流式输出，并添加错误捕捉)
+    try:
+        with st.chat_message("assistant", avatar=ASSISTANT_ICON) as chatmsg:
+            response = model.generate_content(user_input, stream=True)
+            chatmsg.write(response.text)
+            st.session_state.messages.append({"role": "assistant", "content": response.text})
+    
+    except Exception as e:
+        # 捕捉可能出现的 ResourceExhausted 或 NotFound 错误
+        st.error(f"发生错误: 调用Gemini API失败。请检查API Key配额。详细信息: {e}")
