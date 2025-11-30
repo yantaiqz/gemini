@@ -2,6 +2,23 @@ import streamlit as st
 import google.generativeai as genai
 # import os # 不再需要，已删除
 
+
+# 必须在所有 st.write(), st.button() 等 Streamlit 命令之前调用
+st.set_page_config(
+    page_title="您的应用名称",
+    page_icon="⚖️",
+    # 设置 menu_items 参数来自定义菜单内容
+    menu_items={
+        # 内置项：全部设置为 None，可以隐藏它们
+        'Get Help': None,        # 隐藏 "获取帮助"
+        'Report a bug': None,    # 隐藏 "报告 Bug"
+        'About': None,           # 隐藏 "关于" 页面
+        
+        # 您也可以添加自定义的菜单项，例如：
+        # 'Custom Link': 'https://yourwebsite.com/link' 
+    }
+)
+
 # -------------------------------------------------------------
 # --- 1. 常量定义、系统指令和模型配置 (放在代码最顶部) ---
 # -------------------------------------------------------------
