@@ -68,21 +68,16 @@ if not api_key:
     st.error("请配置 API Key")
     st.stop()
 
+
+# 设置 max_output_tokens 为 4096，以确保回答长度足够
+generation_config = {
+    "max_output_tokens": 4096 
+}
 genai.configure(api_key=api_key)
-
-# model = genai.GenerativeModel('gemini-2.5-flash')
-
-@st.cache_resource(show_spinner=False)
-def initialize_model():
-    model = genai.GenerativeModel(
-        model_name='gemini-2.5-flash',
-        system_instruction=SYSTEM_INSTRUCTION,
-        # 显式设置 max_output_tokens
-        generation_config={
-            "max_output_tokens": 4096 # 设置为 4096 tokens
-        }
-    )
-    return model
+model = genai.GenerativeModel(
+    'gemini-2.5-flash',
+    generation_config=generation_config
+)
 
 # 简单的聊天界面
 if "messages" not in st.session_state:
