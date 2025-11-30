@@ -144,8 +144,8 @@ if user_input:
 
         with st.chat_message("assistant", avatar=ASSISTANT_ICON):
             response = model.generate_content(user_input)
-            full_response = st.write(response) 
-            st.session_state.messages.append({"role": "assistant", "content": full_response})
+            st.chat_message("assistant", avatar=ASSISTANT_ICON).write(response.text)
+            st.session_state.messages.append({"role": "assistant", "content": response.text})
 
     except Exception as e:
         # 捕捉可能出现的 ResourceExhausted 或 NotFound 错误
