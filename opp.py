@@ -265,3 +265,65 @@ def clear_chat_history():
 if st.button('🧹 清空聊天记录', help="点击后将清除所有历史对话和文件上传记录"):
     clear_chat_history()
     st.rerun() # 强制 Streamlit 立即重新运行脚本，刷新界面
+
+
+import json
+import datetime
+import os
+
+
+# -------------------------- 2. 安全的计数器逻辑 --------------------------
+COUNTER_FILE = "visit_stats.json"
+
+def update_daily_visits():
+    """安全更新访问量，如果出错则返回 0，绝不让程序崩溃"""
+    try:
+        today_str = datetime.date.today().isoformat()
+        
+        # 1. 检查 Session，防止刷新页面重复计数
+        if "has_counted" in st.session_state:
+            if os.path.exists(COUNTER_FILE):
+                try:
+                    with open(COUNTER_FILE, "r") as f:
+                        return json.load(f).get("count", 0)
+                except:
+                    return 0
+            return 0
+
+        # 2. 读取或初始化数据
+        data = {"date": today_str, "count": 0}
+        
+        if os.path.exists(COUNTER_FILE):
+            try:
+                with open(COUNTER_FILE, "r") as f:
+                    file_data = json.load(f)
+                    if file_data.get("date") == today_str:
+                        data = file_data
+            except:
+                pass # 文件损坏则从0开始
+        
+        # 3. 计数 +1
+        data["count"] += 1
+        
+        # 4. 写入文件 (最容易报错的地方，加了try保护)
+        with open(COUNTER_FILE, "w") as f:
+            json.dump(data, f)
+        
+        st.session_state["has_counted"] = True
+        return data["count"]
+        
+    except Exception as e:
+        # 如果发生任何错误（如权限不足），静默失败，不影响页面显示
+        return 0
+
+
+    # -------- 每日访问统计 (即使报错也不崩溃) --------
+    daily_visits = update_daily_visits()
+    visit_text = f"Daily Visits: {daily_visits}" if selected_lang == "English" else f"今日访问: {daily_visits}"
+    
+    st.markdown(f"""
+    <div style="text-align: center; color: #64748b; font-size: 0.7rem; margin-top: 10px; padding-bottom: 20px;">
+        {visit_text}
+    </div>
+    """, unsafe_allow_html=True)
+    
