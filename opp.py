@@ -5,6 +5,7 @@ import tempfile
 import json
 import datetime
 import os
+import docx
 
 # -------------------------------------------------------------
 # --- 1. 多语言配置与资源字典 (新增模块) ---
@@ -294,11 +295,45 @@ if uploaded_file and st.button(T["start_review"], key="review_start_btn"):
             # 拼接语言要求到 Prompt
             final_risk_prompt = RISK_ANALYSIS_PROMPT_BASE + "\n\n" + T["risk_prompt_lang"]
             
-            prompt_parts = [
-                final_risk_prompt,
-                {"mime_type": mime_type, "data": file_bytes}
-            ]
+            #prompt_parts = [
+            #    final_risk_prompt,
+            #    {"mime_type": mime_type, "data": file_bytes}
+            #]
 
+
+            # === 核心修改开始：针对不同文件类型的处理 ===
+            prompt_parts = []
+            
+            if mime_type == "application/pdf":
+                # PDF 可以直接传二进制给 Gemini
+                prompt_parts = [
+                    final_risk_prompt,
+                    {"mime_type": mime_type, "data": file_bytes}
+                ]
+            
+            elif mime_type == "text/plain":
+                # TXT 文件解码为字符串
+                text_content = file_bytes.decode("utf-8")
+                prompt_parts = [final_risk_prompt, text_content]
+            
+            elif "wordprocessingml.document" in mime_type: # 处理 .docx
+                # Word 文档需要提取文字
+                try:
+                    doc = docx.Document(io.BytesIO(file_bytes))
+                    full_text = []
+                    for para in doc.paragraphs:
+                        full_text.append(para.text)
+                    # 将提取的文字拼接成一个长字符串
+                    text_content = '\n'.join(full_text)
+                    
+                    # 将文字作为 Prompt 的一部分发送
+                    prompt_parts = [final_risk_prompt, text_content]
+                except Exception as e:
+                    st.error(f"解析 Word 文件失败: {e}")
+                    st.stop()
+            # === 核心修改结束 ===
+            
+            
             response_stream = model.generate_content(prompt_parts, stream=True)
             
             with st.chat_message("assistant", avatar="👩‍💼"):
