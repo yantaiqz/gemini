@@ -341,7 +341,7 @@ def initialize_model(lang_code):
     sys_instruction = get_system_instruction(lang_code)
     model = genai.GenerativeModel(
         #model_name='gemini-2.0-flash', 
-        model_name='gemini-2.0-pro', 
+        model_name='gemini-2.5-pro', 
         system_instruction=sys_instruction,
         generation_config=generation_config
     )
