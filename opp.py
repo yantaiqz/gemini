@@ -514,7 +514,7 @@ if st.button(T["clear_history"], help=T["clear_help"]):
 def render_bottom_nav(text):
     nav_html = f"""
     <div class="bottom-nav">
-        <a href="https://youqian.streamlit.app/" class="nav-item active" target="_self">
+        <a href="https://youqian.streamlit.app/" class="nav-item active" target="_blank">
             {text['nav_1']}
         </a>
         <a href="https://fangchan.streamlit.app/" class="nav-item" target="_blank">
@@ -523,7 +523,7 @@ def render_bottom_nav(text):
         <a href="https://fangjia.streamlit.app/" class="nav-item" target="_blank">
             {text['nav_3']}
         </a>
-        <a href="https://chuhai.streamlit.app/" class="nav-item" target="_blank">
+        <a href="https://chuhai.streamlit.app/" class="nav-item" target="_self">
             {text['nav_4']}
         </a>
         <a href="https://chuhai.streamlit.app/" class="nav-item" target="_blank">
