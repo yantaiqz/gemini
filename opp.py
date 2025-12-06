@@ -442,7 +442,7 @@ if uploaded_file and st.button(T["start_review"], key="review_start_btn"):
                     if chunk.text:
                         full_review += chunk.text
                         message_placeholder.markdown(full_review + "▌")
-                message_placeholder.markdown(full_review)
+                # message_placeholder.markdown(full_review)
                 st.session_state.messages.append({"role": "assistant", "content": full_review})
                 
         st.success(T["review_success"])
