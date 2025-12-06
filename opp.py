@@ -8,7 +8,7 @@ import os
 import docx
 
 # -------------------------------------------------------------
-# --- 1. 多语言配置与资源字典 (新增模块) ---
+# --- 1. 多语言配置与资源字典 ---
 # -------------------------------------------------------------
 
 # 语言选项映射
@@ -43,10 +43,19 @@ TRANSLATIONS = {
             "巴西比亚迪的征信情况",
             "阿布扎比国家石油公司的账期多久比较安全"
         ],
-        "risk_prompt_lang": "请使用中文输出报告。"
+        "risk_prompt_lang": "请使用中文输出报告。",
+        # --- 导航栏 (保持不变的内容) ---
+        "nav_1": "财富排行", 
+        "nav_2": "世界房产", 
+        "nav_3": "城市房价", 
+        "nav_4": "全球法律", 
+        "nav_5": "全球企业", 
+        "nav_6": "合同审查", 
+        "nav_7": "德国财税", 
+        "nav_8": "深圳房市"
     },
     "en": {
-        "page_title": "Cross-border Compliance Judi: Laws, Companies & Contracts",
+        "page_title": "Cross-border Compliance Judi",
         "daily_visits": "Daily Visits",
         "upload_label": "Contract Risk Review",
         "upload_help": "Gemini can analyze PDF and text files directly.",
@@ -54,98 +63,213 @@ TRANSLATIONS = {
         "review_success": "Review Completed!",
         "file_uploaded": "File uploaded: {file_name}, requesting review.",
         "processing": "Analyzing {file_name}...",
-        "common_q_title": "Common Compliance Questions & Company Checks",
+        "common_q_title": "Common Questions",
         "chat_placeholder": "Enter your compliance question...",
         "clear_history": "🧹 Clear History",
-        "clear_help": "Clears all chat history and uploaded files.",
-        "welcome": "Hello! I am Judi, your Cross-border Compliance Expert. How can I assist you with legal, regulatory, or qualification issues for your overseas business?",
+        "clear_help": "Clears all chat history.",
+        "welcome": "Hello! I am Judi, your Cross-border Compliance Expert.",
         "questions": [
             "How to handle a US Amazon TRO?",
-            "Key points for manufacturing labor contracts in Vietnam?",
-            "Data compliance for car exports to Europe?",
+            "Vietnam labor contract key points?",
+            "EU data compliance for car exports?",
             "Credit status of BYD Brazil?",
-            "Safe payment terms for ADNOC (Abu Dhabi)?"
+            "Safe payment terms for ADNOC?"
         ],
-        "risk_prompt_lang": "Please output the report in English."
+        "risk_prompt_lang": "Please output the report in English.",
+        # --- Navbar (Content Unchanged) ---
+        "nav_1": "Wealth Rank", 
+        "nav_2": "Global Real Estate",  
+        "nav_3": "Urban Housing",  
+        "nav_4": "Global Legal",  
+        "nav_5": "Global Enterprises",  
+        "nav_6": "Contract Review",  
+        "nav_7": "German Tax",  
+        "nav_8": "Shenzhen Property" 
     },
     "ar": {
-        "page_title": "جودي للامتثال عبر الحدود: القوانين والشركات والعقود",
+        "page_title": "جودي للامتثال عبر الحدود",
         "daily_visits": "زيارات اليوم",
         "upload_label": "مراجعة مخاطر العقد",
-        "upload_help": "يمكن لـ Gemini تحليل ملفات PDF والنصوص مباشرة.",
+        "upload_help": "تحليل PDF والنصوص.",
         "start_review": "بدء المراجعة",
         "review_success": "تمت المراجعة!",
-        "file_uploaded": "تم رفع الملف: {file_name}، جاري طلب المراجعة.",
+        "file_uploaded": "تم رفع الملف: {file_name}",
         "processing": "جاري تحليل {file_name}...",
-        "common_q_title": "أسئلة الامتثال الشائعة وفحص الشركات",
-        "chat_placeholder": "أدخل سؤال الامتثال الخاص بك...",
+        "common_q_title": "أسئلة شائعة",
+        "chat_placeholder": "أدخل سؤالك...",
         "clear_history": "🧹 مسح السجل",
-        "clear_help": "يمسح كل سجل الدردشة والملفات المرفوعة.",
-        "welcome": "مرحبًا! أنا جودي، خبيرة الامتثال عبر الحدود. كيف يمكنني مساعدتك في المسائل القانونية أو التنظيمية لأعمالك الخارجية؟",
+        "clear_help": "يمسح السجل.",
+        "welcome": "مرحبًا! أنا جودي، خبيرة الامتثال.",
         "questions": [
-            "كيفية التعامل مع أمر تقييدي مؤقت (TRO) من أمازون الأمريكية؟",
-            "النقاط الرئيسية لعقود العمل في مصانع فيتنام؟",
-            "الامتثال للبيانات لتصدير السيارات إلى أوروبا؟",
-            "الوضع الائتماني لشركة BYD البرازيل؟",
-            "شروط الدفع الآمنة لشركة أدنوك (أبو ظبي)؟"
+            "التعامل مع TRO من أمازون؟",
+            "عقود العمل في فيتنام؟",
+            "الامتثال للبيانات في أوروبا؟",
+            "الوضع الائتماني لشركة BYD؟",
+            "شروط الدفع لأدنوك؟"
         ],
-        "risk_prompt_lang": "يرجى إخراج التقرير باللغة العربية."
+        "risk_prompt_lang": "يرجى إخراج التقرير باللغة العربية.",
+        # --- Navbar (Mapped to English for consistency or translated) ---
+        "nav_1": "Wealth Rank", 
+        "nav_2": "Global Real Estate",  
+        "nav_3": "Urban Housing",  
+        "nav_4": "Global Legal",  
+        "nav_5": "Global Enterprises",  
+        "nav_6": "Contract Review",  
+        "nav_7": "German Tax",  
+        "nav_8": "Shenzhen Property" 
     },
     "pt": {
-        "page_title": "Compliance Transfronteiriço Judi: Leis, Empresas e Contratos",
+        "page_title": "Compliance Judi",
         "daily_visits": "Visitas Hoje",
-        "upload_label": "Revisão de Risco de Contrato",
-        "upload_help": "Gemini pode analisar arquivos PDF e texto diretamente.",
+        "upload_label": "Revisão de Contrato",
+        "upload_help": "Analisa PDF e texto.",
         "start_review": "Iniciar Revisão",
-        "review_success": "Revisão Concluída!",
-        "file_uploaded": "Arquivo enviado: {file_name}, solicitando revisão.",
+        "review_success": "Concluído!",
+        "file_uploaded": "Arquivo enviado: {file_name}",
         "processing": "Analisando {file_name}...",
-        "common_q_title": "Perguntas Comuns de Compliance & Verificação de Empresas",
-        "chat_placeholder": "Digite sua dúvida de compliance...",
-        "clear_history": "🧹 Limpar Histórico",
-        "clear_help": "Limpa todo o histórico de chat e arquivos.",
-        "welcome": "Olá! Sou a Judi, sua especialista em Compliance Transfronteiriço. Como posso ajudar com questões legais ou regulatórias para seus negócios no exterior?",
+        "common_q_title": "Perguntas Comuns",
+        "chat_placeholder": "Digite sua dúvida...",
+        "clear_history": "🧹 Limpar",
+        "clear_help": "Limpa histórico.",
+        "welcome": "Olá! Sou a Judi, especialista em Compliance.",
         "questions": [
-            "Como lidar com uma TRO da Amazon nos EUA?",
-            "Pontos chave em contratos de trabalho no Vietnã?",
-            "Compliance de dados para exportação de carros para a Europa?",
-            "Situação de crédito da BYD Brasil?",
-            "Prazos de pagamento seguros para ADNOC (Abu Dhabi)?"
+            "Como lidar com TRO da Amazon?",
+            "Contratos de trabalho no Vietnã?",
+            "Compliance de dados na Europa?",
+            "Crédito da BYD Brasil?",
+            "Pagamento ADNOC?"
         ],
-        "risk_prompt_lang": "Por favor, emita o relatório em Português."
+        "risk_prompt_lang": "Por favor, emita o relatório em Português.",
+        # --- Navbar ---
+        "nav_1": "Wealth Rank", 
+        "nav_2": "Global Real Estate",  
+        "nav_3": "Urban Housing",  
+        "nav_4": "Global Legal",  
+        "nav_5": "Global Enterprises",  
+        "nav_6": "Contract Review",  
+        "nav_7": "German Tax",  
+        "nav_8": "Shenzhen Property" 
     },
     "es": {
-        "page_title": "Cumplimiento Transfronterizo Judi: Leyes, Empresas y Contratos",
+        "page_title": "Cumplimiento Judi",
         "daily_visits": "Visitas Hoy",
-        "upload_label": "Revisión de Riesgos de Contrato",
-        "upload_help": "Gemini puede analizar archivos PDF y texto directamente.",
+        "upload_label": "Revisión de Contrato",
+        "upload_help": "Analiza PDF y texto.",
         "start_review": "Iniciar Revisión",
-        "review_success": "¡Revisión Completada!",
-        "file_uploaded": "Archivo subido: {file_name}, solicitando revisión.",
+        "review_success": "¡Completado!",
+        "file_uploaded": "Archivo subido: {file_name}",
         "processing": "Analizando {file_name}...",
-        "common_q_title": "Preguntas Comunes de Cumplimiento",
-        "chat_placeholder": "Ingrese su pregunta de cumplimiento...",
-        "clear_history": "🧹 Borrar Historial",
-        "clear_help": "Borra todo el historial de chat y archivos.",
-        "welcome": "¡Hola! Soy Judi, su experta en Cumplimiento Transfronterizo. ¿Cómo puedo ayudarle con problemas legales o regulatorios en el extranjero?",
+        "common_q_title": "Preguntas Comunes",
+        "chat_placeholder": "Ingrese su pregunta...",
+        "clear_history": "🧹 Borrar",
+        "clear_help": "Borra historial.",
+        "welcome": "¡Hola! Soy Judi, experta en Cumplimiento.",
         "questions": [
-            "¿Cómo manejar una TRO de Amazon EE.UU.?",
-            "¿Puntos clave en contratos laborales en Vietnam?",
-            "¿Cumplimiento de datos para exportar autos a Europa?",
-            "¿Situación crediticia de BYD Brasil?",
-            "¿Plazos de pago seguros para ADNOC (Abu Dhabi)?"
+            "¿Manejo de TRO de Amazon?",
+            "¿Contratos laborales en Vietnam?",
+            "¿Datos para Europa?",
+            "¿Crédito de BYD Brasil?",
+            "¿Pago seguro ADNOC?"
         ],
-        "risk_prompt_lang": "Por favor, emita el informe en Español."
+        "risk_prompt_lang": "Por favor, emita el informe en Español.",
+        # --- Navbar ---
+        "nav_1": "Wealth Rank", 
+        "nav_2": "Global Real Estate",  
+        "nav_3": "Urban Housing",  
+        "nav_4": "Global Legal",  
+        "nav_5": "Global Enterprises",  
+        "nav_6": "Contract Review",  
+        "nav_7": "German Tax",  
+        "nav_8": "Shenzhen Property" 
     }
 }
 
 # -------------------------------------------------------------
-# --- 2. 页面初始化与语言选择 ---
+# --- 2. 页面初始化、CSS样式与语言选择 ---
 # -------------------------------------------------------------
 
-st.set_page_config(page_title="跨境合规专家AI (Global Compliance)", page_icon="⚖️")
+st.set_page_config(page_title="跨境合规专家AI (Global Compliance)", page_icon="⚖️", layout="wide")
 
-# --- 语言选择器 (放在最顶部) ---
+# --- 注入 CSS 样式 (使用 WealthRank 的纯文字导航样式) ---
+st.markdown("""
+<style>
+    /* 1. 隐藏 Streamlit 默认元素 */
+    header, [data-testid="stSidebar"], footer, .stDeployButton, [data-testid="stToolbar"] {
+        display: none !important;
+    }
+
+    /* 2. 全局容器调整 */
+    .stApp {
+        background-color: #f8fafc !important;
+        font-family: 'Inter', sans-serif !important;
+        padding-bottom: 80px !important; /* 关键：防止内容被导航栏遮挡 */
+        margin: 0 !important;
+    }
+
+    /* 3. 底部导航核心样式 - 纯文字现代风 (8个项) */
+    .bottom-nav {
+        position: fixed !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 60px !important;
+        background-color: rgba(255, 255, 255, 0.90) !important;
+        backdrop-filter: blur(16px) !important;
+        border-top: 1px solid rgba(226, 232, 240, 0.8) !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        padding: 0 10px !important;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.03) !important;
+        z-index: 9999 !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* 4. 导航项样式 */
+    .nav-item {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 100% !important;
+        height: 40px !important;
+        color: #94a3b8 !important;
+        text-decoration: none !important;
+        font-size: 0.70rem !important; /* 缩小适配8个项 */
+        font-weight: 600 !important;
+        letter-spacing: -0.01em !important;
+        border-radius: 8px !important;
+        transition: all 0.2s ease !important;
+        margin: 0 2px !important;
+        white-space: nowrap !important; /* 禁止换行 */
+        overflow: hidden !important; /* 超出隐藏 */
+        text-overflow: ellipsis !important; /* 超长显示省略号 */
+    }
+    
+    .nav-item:hover {
+        background-color: rgba(241, 245, 249, 0.8) !important;
+        color: #64748b !important;
+    }
+    
+    .nav-item.active {
+        color: #2563eb !important;
+        background-color: rgba(59, 130, 246, 0.1) !important;
+    }
+    
+    .nav-item.active::before {
+        display: none !important;
+    }
+    
+    /* 适配手机端，避免8个字太拥挤 */
+    @media (max-width: 640px) {
+        .nav-item {
+            font-size: 0.65rem !important;
+            margin: 0 1px !important;
+        }
+    }
+</style>
+""", unsafe_allow_html=True)
+
+# --- 语言选择器 ---
 selected_lang_label = st.selectbox(
     "🌐 Language / 语言 / لغة / Idioma",
     options=list(LANG_OPTIONS.keys()),
@@ -163,24 +287,22 @@ st.title(T["page_title"])
 USER_ICON = "👤"
 ASSISTANT_ICON = "👩‍💼"
 
-# 动态生成 System Instruction，确保 AI 知道用什么语言回答
+# 动态生成 System Instruction
 def get_system_instruction(lang_code):
     base_instruction = """
     **Role:**
-    You are a "Global Cross-border Compliance Expert and International Lawyer" with 20 years of experience. Your core clients are "Global Expansion Enterprises". Your task is to provide rigorous, professional, and practical compliance advice based on the legal environment of the target country (e.g., USA, EU, Southeast Asia).
-
+    You are a "Global Cross-border Compliance Expert and International Lawyer".
+    
     **Core Guidelines:**
-    1. **Professional Tone:** Objective, neutral, rigorous. Include necessary legal disclaimers.
-    2. **Region Specific:** Answers must be based on the current laws of the target country.
+    1. **Professional Tone:** Objective, neutral, rigorous.
+    2. **Region Specific:** Based on current laws.
     3. **Structured Output:** Use "Core Risks", "Legal Basis", "Compliance Suggestions".
-    4. **Mandatory Citations:** End every answer with a [Data Source/Legal Basis] section.
-    5. **Company Reports:** When asked about a specific company, strictly follow the "Corporate Credit Assessment Report" format provided in your knowledge base.
-
+    4. **Mandatory Citations:** End with [Data Source/Legal Basis].
+    
     **Disclaimer:**
     End all responses with: "This response is AI-generated for reference only and does not constitute formal legal advice."
     """
     
-    # 语言强制指令
     lang_directive = {
         "zh": "请务必使用**中文**回答所有问题。",
         "en": "Please answer all questions in **English**.",
@@ -193,11 +315,11 @@ def get_system_instruction(lang_code):
 
 RISK_ANALYSIS_PROMPT_BASE = """
 Please act as a "Cross-border Compliance Expert" and strictly review this contract file. 
-Generate a structured report in Markdown format with the following sections:
-1. **Core Risk Identification:** Top 3 legal/commercial risks.
-2. **Jurisdiction/Choice of Law:** Evaluate the risk level (High/Med/Low).
-3. **Termination & Exit Mechanism:** Fairness of termination clauses.
-4. **Comprehensive Risk Rating:** High/Medium/Low and short advice.
+Generate a structured report in Markdown format with:
+1. **Core Risk Identification**
+2. **Jurisdiction/Choice of Law**
+3. **Termination & Exit Mechanism**
+4. **Comprehensive Risk Rating**
 """
 
 # API Key 配置
@@ -207,23 +329,20 @@ if not api_key:
     st.stop()
 genai.configure(api_key=api_key)
 
-# 缓存模型初始化 (依赖于语言，如果语言变了，System Instruction 变了，需要重新加载)
+# 缓存模型初始化
 @st.cache_resource
 def initialize_model(lang_code):
     generation_config = {
         "max_output_tokens": 4096 
     }
-    
     sys_instruction = get_system_instruction(lang_code)
-    
     model = genai.GenerativeModel(
-        model_name='gemini-2.0-flash', # 建议使用 flash 2.0 或 1.5 flash，速度快且便宜
+        model_name='gemini-2.0-flash', 
         system_instruction=sys_instruction,
         generation_config=generation_config
     )
     return model
 
-# 初始化对应语言的模型
 model = initialize_model(current_lang_code)
 
 # -------------------------- 4. 访问计数器 --------------------------
@@ -286,53 +405,33 @@ if uploaded_file and st.button(T["start_review"], key="review_start_btn"):
     mime_type = uploaded_file.type
     file_name = uploaded_file.name
 
-    # 显示用户消息（翻译）
     user_msg_display = T["file_uploaded"].format(file_name=file_name)
     st.chat_message("user", avatar="👤").write(user_msg_display)
 
     try:
         with st.spinner(T["processing"].format(file_name=file_name)):
-            # 拼接语言要求到 Prompt
             final_risk_prompt = RISK_ANALYSIS_PROMPT_BASE + "\n\n" + T["risk_prompt_lang"]
-            
-            #prompt_parts = [
-            #    final_risk_prompt,
-            #    {"mime_type": mime_type, "data": file_bytes}
-            #]
-
-
-            # === 核心修改开始：针对不同文件类型的处理 ===
             prompt_parts = []
             
             if mime_type == "application/pdf":
-                # PDF 可以直接传二进制给 Gemini
                 prompt_parts = [
                     final_risk_prompt,
                     {"mime_type": mime_type, "data": file_bytes}
                 ]
-            
             elif mime_type == "text/plain":
-                # TXT 文件解码为字符串
                 text_content = file_bytes.decode("utf-8")
                 prompt_parts = [final_risk_prompt, text_content]
-            
-            elif "wordprocessingml.document" in mime_type: # 处理 .docx
-                # Word 文档需要提取文字
+            elif "wordprocessingml.document" in mime_type:
                 try:
                     doc = docx.Document(io.BytesIO(file_bytes))
                     full_text = []
                     for para in doc.paragraphs:
                         full_text.append(para.text)
-                    # 将提取的文字拼接成一个长字符串
                     text_content = '\n'.join(full_text)
-                    
-                    # 将文字作为 Prompt 的一部分发送
                     prompt_parts = [final_risk_prompt, text_content]
                 except Exception as e:
                     st.error(f"解析 Word 文件失败: {e}")
                     st.stop()
-            # === 核心修改结束 ===
-            
             
             response_stream = model.generate_content(prompt_parts, stream=True)
             
@@ -344,7 +443,6 @@ if uploaded_file and st.button(T["start_review"], key="review_start_btn"):
                         full_review += chunk.text
                         message_placeholder.markdown(full_review + "▌")
                 message_placeholder.markdown(full_review)
-                # 记录到历史
                 st.session_state.messages.append({"role": "assistant", "content": full_review})
                 
         st.success(T["review_success"])
@@ -358,7 +456,6 @@ st.markdown('<hr style="border-top: 2px dashed #8c8c8c; background: none;">', un
 # --- 6. 聊天模块与常见问题 ---
 # -------------------------------------------------------------
 
-# 初始化聊天历史 (如果语言改变，可以在这里重置，或者保留历史)
 if "messages" not in st.session_state:
     st.session_state.messages = [
         {"role": "assistant", "content": T["welcome"]}
@@ -366,22 +463,19 @@ if "messages" not in st.session_state:
 
 st.subheader(T["common_q_title"])
 
-# 常见问题按钮 (动态加载当前语言的问题)
 cols = st.columns(3)
 prompt_from_button = None
-current_questions = T["questions"] # 获取当前语言的问题列表
+current_questions = T["questions"]
 
 for i, question in enumerate(current_questions):
     with cols[i % 3]: 
         if st.button(question, use_container_width=True, key=f"q_{current_lang_code}_{i}"):
             prompt_from_button = question
 
-# 显示历史消息
 for msg in st.session_state.messages:
     icon = USER_ICON if msg["role"] == "user" else ASSISTANT_ICON
     st.chat_message(msg["role"], avatar=icon).write(msg["content"])
 
-# 处理输入
 chat_input_text = st.chat_input(T["chat_placeholder"])
 
 if prompt_from_button:
@@ -399,8 +493,6 @@ if user_input:
         with st.chat_message("assistant", avatar=ASSISTANT_ICON):
             message_placeholder = st.empty()
             full_response = ""
-            
-            # 发送请求时，模型已经配置了对应语言的 System Instruction
             for chunk in model.generate_content(user_input, stream=True):
                 full_response += chunk.text if chunk.text else ""
                 message_placeholder.markdown(full_response + "▌")
@@ -411,7 +503,44 @@ if user_input:
     except Exception as e:
         st.error(f"API Error: {e}")
 
-# 清空按钮
 if st.button(T["clear_history"], help=T["clear_help"]):
     st.session_state.messages = [{"role": "assistant", "content": T["welcome"]}]
     st.rerun()
+
+# -------------------------------------------------------------
+# --- 7. 渲染底部导航栏 (保持不变的8个链接内容) ---
+# -------------------------------------------------------------
+
+def render_bottom_nav(text):
+    nav_html = f"""
+    <div class="bottom-nav">
+        <a href="https://youqian.streamlit.app/" class="nav-item active" target="_self">
+            {text['nav_1']}
+        </a>
+        <a href="https://fangchan.streamlit.app/" class="nav-item" target="_blank">
+            {text['nav_2']}
+        </a>
+        <a href="https://fangjia.streamlit.app/" class="nav-item" target="_blank">
+            {text['nav_3']}
+        </a>
+        <a href="https://chuhai.streamlit.app/" class="nav-item" target="_blank">
+            {text['nav_4']}
+        </a>
+        <a href="https://chuhai.streamlit.app/" class="nav-item" target="_blank">
+            {text['nav_5']}
+        </a>
+        <a href="https://chuhai.streamlit.app/" class="nav-item" target="_blank">
+            {text['nav_6']}
+        </a>
+        <a href="https://qfschina.streamlit.app/" class="nav-item" target="_blank">
+            {text['nav_7']}
+        </a>
+        <a href="https://fangjia.streamlit.app/" class="nav-item" target="_blank">
+            {text['nav_8']}
+        </a>
+    </div>
+    """
+    st.markdown(nav_html, unsafe_allow_html=True)
+
+# 调用导航渲染
+render_bottom_nav(T)
