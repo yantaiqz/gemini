@@ -1,4 +1,4 @@
-# gemini [跨境法律合规查询](https://fangchan.streamlit.app/) 
+# gemini [跨境法律合规查询](https://chuhai.streamlit.app/) 
 
 为您生成针对该**跨境合规AI应用**的代码优化过的 SEO Readme 文件。
 
