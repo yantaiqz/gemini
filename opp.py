@@ -523,10 +523,10 @@ def render_bottom_nav(text):
         <a href="https://fangjia.streamlit.app/" class="nav-item" target="_blank">
             {text['nav_3']}
         </a>
-        <a href="https://chuhai.streamlit.app/" class="nav-item" target="_self">
+        <a href="https://chuhai.streamlit.app/" class="nav-item active" target="_self">
             {text['nav_4']}
         </a>
-        <a href="https://chuhai.streamlit.app/" class="nav-item active" target="_blank">
+        <a href="https://chuhai.streamlit.app/" class="nav-item" target="_blank">
             {text['nav_5']}
         </a>
         <a href="https://chuhai.streamlit.app/" class="nav-item" target="_blank">
