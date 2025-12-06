@@ -28,7 +28,7 @@ TRANSLATIONS = {
         "upload_label": "法律文件风险审核",
         "upload_help": "Gemini 可以直接读取 PDF 和文本文件进行分析",
         "start_review": "立即启动风险审查",
-        "review_success": "文件审查完成！", # 已修改
+        "review_success": "文件审查完成！",
         "file_uploaded": "已上传文件: {file_name}，正在请求风险审查。",
         "processing": "正在分析 {file_name}...",
         "common_q_title": "常见合规问题和外企资质快速查询",
@@ -44,7 +44,6 @@ TRANSLATIONS = {
             "阿布扎比国家石油公司的账期多久比较安全"
         ],
         "risk_prompt_lang": "请使用中文输出报告。",
-        # --- 导航栏 ---
         "nav_1": "财富排行",
         "nav_2": "世界房产",
         "nav_3": "城市房价",
@@ -60,7 +59,7 @@ TRANSLATIONS = {
         "upload_label": "Legal Document Risk Review",
         "upload_help": "Gemini can analyze PDF and text files directly.",
         "start_review": "Start Risk Review",
-        "review_success": "File Review Completed!", # 已修改
+        "review_success": "File Review Completed!",
         "file_uploaded": "File uploaded: {file_name}, requesting review.",
         "processing": "Analyzing {file_name}...",
         "common_q_title": "Common Compliance Questions & Company Checks",
@@ -76,7 +75,6 @@ TRANSLATIONS = {
             "Safe payment terms for ADNOC (Abu Dhabi)?"
         ],
         "risk_prompt_lang": "Please output the report in English.",
-        # --- 导航栏 ---
         "nav_1": "Wealth Rank",
         "nav_2": "Global Real Estate",
         "nav_3": "City Housing",
@@ -92,7 +90,7 @@ TRANSLATIONS = {
         "upload_label": "مراجعة مخاطر الوثائق القانونية",
         "upload_help": "يمكن لـ Gemini تحليل ملفات PDF والنصوص مباشرة.",
         "start_review": "بدء المراجعة",
-        "review_success": "تمت مراجعة الملف!", # 已修改
+        "review_success": "تمت مراجعة الملف!",
         "file_uploaded": "تم رفع الملف: {file_name}، جاري طلب المراجعة.",
         "processing": "جاري تحليل {file_name}...",
         "common_q_title": "أسئلة الامتثال الشائعة وفحص الشركات",
@@ -108,7 +106,6 @@ TRANSLATIONS = {
             "شروط الدفع الآمنة لشركة أدنوك (أبو ظبي)؟"
         ],
         "risk_prompt_lang": "يرجى إخراج التقرير باللغة العربية。",
-        # --- 导航栏 ---
         "nav_1": "تصنيف الثروة",
         "nav_2": "عقارات عالمية",
         "nav_3": "أسعار المدن",
@@ -124,7 +121,7 @@ TRANSLATIONS = {
         "upload_label": "Revisão de Risco de Documento Legal",
         "upload_help": "Gemini pode analisar arquivos PDF e texto diretamente。",
         "start_review": "Iniciar Revisão",
-        "review_success": "Revisão de Arquivo Concluída!", # 已修改
+        "review_success": "Revisão de Arquivo Concluída!",
         "file_uploaded": "Arquivo enviado: {file_name}, solicitando revisão.",
         "processing": "Analisando {file_name}...",
         "common_q_title": "Perguntas Comuns de Compliance & Verificação",
@@ -140,7 +137,6 @@ TRANSLATIONS = {
             "Prazos de pagamento seguros para ADNOC (Abu Dhabi)?"
         ],
         "risk_prompt_lang": "Por favor, emita o relatório em Português.",
-        # --- 导航栏 ---
         "nav_1": "Ranking Riqueza",
         "nav_2": "Imóveis Globais",
         "nav_3": "Preços Urbanos",
@@ -156,7 +152,7 @@ TRANSLATIONS = {
         "upload_label": "Revisión de Riesgos de Documentos Legales",
         "upload_help": "Gemini puede analizar archivos PDF y texto directamente。",
         "start_review": "Iniciar Revisión",
-        "review_success": "¡Revisión de Archivo Completada!", # 已修改
+        "review_success": "¡Revisión de Archivo Completada!",
         "file_uploaded": "Archivo subido: {file_name}, solicitando revisión.",
         "processing": "Analizando {file_name}...",
         "common_q_title": "Preguntas Comunes de Cumplimiento",
@@ -172,7 +168,6 @@ TRANSLATIONS = {
             "¿Plazos de pago seguros para ADNOC (Abu Dhabi)?"
         ],
         "risk_prompt_lang": "Por favor, emita el informe en Español。",
-        # --- 导航栏 ---
         "nav_1": "Ranking Riqueza",
         "nav_2": "Inmobiliaria Global",
         "nav_3": "Precios Urbanos",
@@ -190,7 +185,7 @@ TRANSLATIONS = {
 
 st.set_page_config(page_title="跨境合规专家AI (Global Compliance)", page_icon="⚖️", layout="wide")
 
-# --- 注入 CSS 样式 (使用 WealthRank 的纯文字导航样式) ---
+# --- 注入 CSS 样式 ---
 st.markdown("""
 <style>
     /* 1. 隐藏 Streamlit 默认元素 */
@@ -202,11 +197,11 @@ st.markdown("""
     .stApp {
         background-color: #f8fafc !important;
         font-family: 'Inter', sans-serif !important;
-        padding-bottom: 80px !important; /* 关键：防止内容被导航栏遮挡 */
+        padding-bottom: 80px !important;
         margin: 0 !important;
     }
 
-    /* 3. 底部导航核心样式 - 纯文字现代风 (8个项) */
+    /* 3. 底部导航核心样式 */
     .bottom-nav {
         position: fixed !important;
         bottom: 0 !important;
@@ -234,15 +229,15 @@ st.markdown("""
         height: 40px !important;
         color: #94a3b8 !important;
         text-decoration: none !important;
-        font-size: 0.70rem !important; /* 缩小适配8个项 */
+        font-size: 0.70rem !important;
         font-weight: 600 !important;
         letter-spacing: -0.01em !important;
         border-radius: 8px !important;
         transition: all 0.2s ease !important;
         margin: 0 2px !important;
-        white-space: nowrap !important; /* 禁止换行 */
-        overflow: hidden !important; /* 超出隐藏 */
-        text-overflow: ellipsis !important; /* 超长显示省略号 */
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
     }
     
     .nav-item:hover {
@@ -259,7 +254,7 @@ st.markdown("""
         display: none !important;
     }
     
-    /* 适配手机端，避免8个字太拥挤 */
+    /* 适配手机端 */
     @media (max-width: 640px) {
         .nav-item {
             font-size: 0.65rem !important;
@@ -269,6 +264,14 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+# --- 初始化关键会话状态 ---
+if "file_review_completed" not in st.session_state:
+    st.session_state.file_review_completed = False  # 标记文件审查是否完成
+if "last_review_file" not in st.session_state:
+    st.session_state.last_review_file = ""  # 记录最后审查的文件名
+if "last_review_result" not in st.session_state:
+    st.session_state.last_review_result = ""  # 记录最后审查的结果
+
 # --- 语言选择器 ---
 selected_lang_label = st.selectbox(
     "🌐 Language / 语言 / لغة / Idioma",
@@ -276,7 +279,7 @@ selected_lang_label = st.selectbox(
     index=0
 )
 current_lang_code = LANG_OPTIONS[selected_lang_label]
-T = TRANSLATIONS[current_lang_code] # 获取当前语言的翻译包
+T = TRANSLATIONS[current_lang_code]
 
 st.title(T["page_title"])
 
@@ -391,22 +394,33 @@ st.markdown(f"""
 st.markdown('<hr style="border-top: 2px dashed #8c8c8c; background: none;">', unsafe_allow_html=True)
 
 # -------------------------------------------------------------
-# --- 5. 合同风险审核工具 ---
+# --- 5. 合同风险审核工具 (修复重复显示核心逻辑) ---
 # -------------------------------------------------------------
 
 uploaded_file = st.file_uploader(
     T["upload_label"], 
     type=['pdf', 'docx', 'txt'], 
-    help=T["upload_help"]
+    help=T["upload_help"],
+    key="file_uploader"  # 增加唯一key
 )
 
+# 重置审查状态（当上传新文件时）
+if uploaded_file and st.session_state.last_review_file != uploaded_file.name:
+    st.session_state.file_review_completed = False
+    st.session_state.last_review_file = uploaded_file.name
+
 if uploaded_file and st.button(T["start_review"], key="review_start_btn"):
+    # 标记开始审查，防止重复执行
+    st.session_state.file_review_completed = False
     file_bytes = uploaded_file.getvalue()
     mime_type = uploaded_file.type
     file_name = uploaded_file.name
 
     user_msg_display = T["file_uploaded"].format(file_name=file_name)
-    st.chat_message("user", avatar="👤").write(user_msg_display)
+    # 只在首次执行时添加用户消息到会话
+    if not any(msg.get("content") == user_msg_display for msg in st.session_state.messages):
+        st.session_state.messages.append({"role": "user", "content": user_msg_display})
+        st.chat_message("user", avatar="👤").write(user_msg_display)
 
     try:
         with st.spinner(T["processing"].format(file_name=file_name)):
@@ -433,6 +447,7 @@ if uploaded_file and st.button(T["start_review"], key="review_start_btn"):
                     st.error(f"解析 Word 文件失败: {e}")
                     st.stop()
             
+            # 调用API生成审查结果
             response_stream = model.generate_content(prompt_parts, stream=True)
             
             with st.chat_message("assistant", avatar="👩‍💼"):
@@ -442,13 +457,25 @@ if uploaded_file and st.button(T["start_review"], key="review_start_btn"):
                     if chunk.text:
                         full_review += chunk.text
                         message_placeholder.markdown(full_review + "▌")
-                # message_placeholder.markdown(full_review)
+                message_placeholder.markdown(full_review)
+                
+            # 存储审查结果，标记完成（防止重复添加）
+            st.session_state.last_review_result = full_review
+            st.session_state.file_review_completed = True
+            
+            # 只添加一次审查结果到消息列表
+            if not any(msg.get("content") == full_review for msg in st.session_state.messages):
                 st.session_state.messages.append({"role": "assistant", "content": full_review})
                 
         st.success(T["review_success"])
 
     except Exception as e:
         st.error(f"Error details: {e}")
+
+# 显示历史审查结果（仅当审查完成且未在消息列表中时）
+if st.session_state.file_review_completed and st.session_state.last_review_result:
+    if not any(msg.get("content") == st.session_state.last_review_result for msg in st.session_state.messages):
+        st.session_state.messages.append({"role": "assistant", "content": st.session_state.last_review_result})
 
 st.markdown('<hr style="border-top: 2px dashed #8c8c8c; background: none;">', unsafe_allow_html=True)
 
@@ -472,6 +499,7 @@ for i, question in enumerate(current_questions):
         if st.button(question, use_container_width=True, key=f"q_{current_lang_code}_{i}"):
             prompt_from_button = question
 
+# 渲染聊天记录（核心：遍历消息列表）
 for msg in st.session_state.messages:
     icon = USER_ICON if msg["role"] == "user" else ASSISTANT_ICON
     st.chat_message(msg["role"], avatar=icon).write(msg["content"])
@@ -486,8 +514,10 @@ else:
     user_input = None
 
 if user_input:
-    st.chat_message("user", avatar=USER_ICON).write(user_input)
-    st.session_state.messages.append({"role": "user", "content": user_input})
+    # 防止重复添加相同的用户输入
+    if not any(msg.get("content") == user_input for msg in st.session_state.messages):
+        st.chat_message("user", avatar=USER_ICON).write(user_input)
+        st.session_state.messages.append({"role": "user", "content": user_input})
     
     try:
         with st.chat_message("assistant", avatar=ASSISTANT_ICON):
@@ -498,17 +528,23 @@ if user_input:
                 message_placeholder.markdown(full_response + "▌")
             
             message_placeholder.markdown(full_response)
-            st.session_state.messages.append({"role": "assistant", "content": full_response})
+            # 防止重复添加相同的助手回复
+            if not any(msg.get("content") == full_response for msg in st.session_state.messages):
+                st.session_state.messages.append({"role": "assistant", "content": full_response})
     
     except Exception as e:
         st.error(f"API Error: {e}")
 
 if st.button(T["clear_history"], help=T["clear_help"]):
+    # 清空所有相关状态
     st.session_state.messages = [{"role": "assistant", "content": T["welcome"]}]
+    st.session_state.file_review_completed = False
+    st.session_state.last_review_file = ""
+    st.session_state.last_review_result = ""
     st.rerun()
 
 # -------------------------------------------------------------
-# --- 7. 渲染底部导航栏 (保持不变的8个链接内容) ---
+# --- 7. 渲染底部导航栏 ---
 # -------------------------------------------------------------
 
 def render_bottom_nav(text):
