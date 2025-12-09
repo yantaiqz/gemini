@@ -184,6 +184,7 @@ TRANSLATIONS = {
 # -------------------------------------------------------------
 
 st.set_page_config(page_title="跨境合规专家AI (Global Compliance)", page_icon="⚖️", layout="wide")
+
 # --- 注入 CSS 样式 ---
 st.markdown("""
 <style>
@@ -192,24 +193,16 @@ st.markdown("""
         display: none !important;
     }
 
-    /* 2. 全局容器调整 - 核心修复：增加底部内边距，避开导航栏 */
+    /* 2. 全局容器调整 */
     .stApp {
         background-color: #f8fafc !important;
         font-family: 'Inter', sans-serif !important;
+        # padding-bottom: 80px !important;
         padding-bottom: 90px !important; /* 从80px增加到90px，留出足够空间 */
         margin: 0 !important;
-        position: relative !important;
     }
 
-    /* 修复聊天输入框定位 - 关键：给输入框容器增加底部间距 */
-    [data-testid="stChatInput"] {
-        padding-bottom: 10px !important;
-        margin-bottom: 10px !important;
-        position: relative !important;
-        z-index: 100 !important; /* 确保输入框在导航栏之上（但导航栏是fixed，靠padding避开） */
-    }
-
-    /* 3. 底部导航核心样式 - 降低z-index，避免覆盖输入框 */
+    /* 3. 底部导航核心样式 */
     .bottom-nav {
         position: fixed !important;
         bottom: 0 !important;
@@ -224,6 +217,7 @@ st.markdown("""
         justify-content: space-between !important;
         padding: 0 10px !important;
         box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.03) !important;
+        # z-index: 9999 !important;
         z-index: 99 !important; /* 从9999降到99，低于输入框的100 */
         box-sizing: border-box !important;
     }
@@ -262,26 +256,12 @@ st.markdown("""
         display: none !important;
     }
     
-    /* 适配手机端 - 额外增加输入框适配 */
+    /* 适配手机端 */
     @media (max-width: 640px) {
         .nav-item {
             font-size: 0.65rem !important;
             margin: 0 1px !important;
         }
-        /* 手机端进一步增加底部内边距 */
-        .stApp {
-            padding-bottom: 100px !important;
-        }
-        [data-testid="stChatInput"] {
-            width: calc(100% - 20px) !important;
-            margin-left: 10px !important;
-            margin-right: 10px !important;
-        }
-    }
-
-    /* 修复按钮/上传组件的底部间距 */
-    .stButton, .stFileUploader {
-        margin-bottom: 15px !important;
     }
 </style>
 """, unsafe_allow_html=True)
