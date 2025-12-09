@@ -197,8 +197,8 @@ st.markdown("""
     .stApp {
         background-color: #f8fafc !important;
         font-family: 'Inter', sans-serif !important;
-        # padding-bottom: 80px !important;
-        padding-bottom: 180px !important; /* 从80px增加到90px，留出足够空间 */
+        padding-bottom: 80px !important;
+        #padding-bottom: 180px !important; /* 从80px增加到90px，留出足够空间 */
         margin: 0 !important;
     }
 
@@ -208,7 +208,7 @@ st.markdown("""
         bottom: 0 !important;
         left: 0 !important;
         width: 100% !important;
-        height: 60px !important;
+        height: 55px !important;
         background-color: rgba(255, 255, 255, 0.90) !important;
         backdrop-filter: blur(16px) !important;
         border-top: 1px solid rgba(226, 232, 240, 0.8) !important;
