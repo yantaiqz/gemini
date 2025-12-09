@@ -198,7 +198,7 @@ st.markdown("""
         background-color: #f8fafc !important;
         font-family: 'Inter', sans-serif !important;
         # padding-bottom: 80px !important;
-        padding-bottom: 90px !important; /* 从80px增加到90px，留出足够空间 */
+        padding-bottom: 120px !important; /* 从80px增加到90px，留出足够空间 */
         margin: 0 !important;
     }
 
