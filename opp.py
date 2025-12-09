@@ -198,7 +198,7 @@ st.markdown("""
         background-color: #f8fafc !important;
         font-family: 'Inter', sans-serif !important;
         # padding-bottom: 80px !important;
-        padding-bottom: 120px !important; /* 从80px增加到90px，留出足够空间 */
+        padding-bottom: 80px !important; /* 从80px增加到90px，留出足够空间 */
         margin: 0 !important;
     }
 
@@ -217,8 +217,8 @@ st.markdown("""
         justify-content: space-between !important;
         padding: 0 10px !important;
         box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.03) !important;
-        z-index: 9999 !important;
-        #z-index: 99 !important; /* 从9999降到99，低于输入框的100 */
+        #z-index: 9999 !important;
+        z-index: 99 !important; /* 从9999降到99，低于输入框的100 */
         box-sizing: border-box !important;
     }
     
