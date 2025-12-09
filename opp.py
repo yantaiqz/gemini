@@ -217,8 +217,8 @@ st.markdown("""
         justify-content: space-between !important;
         padding: 0 10px !important;
         box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.03) !important;
-        # z-index: 9999 !important;
-        z-index: 99 !important; /* 从9999降到99，低于输入框的100 */
+        z-index: 9999 !important;
+        #z-index: 99 !important; /* 从9999降到99，低于输入框的100 */
         box-sizing: border-box !important;
     }
     
