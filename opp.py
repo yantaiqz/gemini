@@ -324,7 +324,7 @@ if "last_review_result" not in st.session_state:
 
 
 # 创建右上角布局（占满整行，右侧显示按钮/链接）
-col_empty, col_lang, col_more = st.columns([0.7, 0.1, 0.2])
+col_empty, col_lang, col_more = st.columns([4, 1, 1])
 
 with col_lang:
     # 仅展示无实际功能的语言切换按钮
