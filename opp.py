@@ -7,6 +7,51 @@ import datetime
 import os
 import docx
 
+
+# -------------------------- 右上角功能区 --------------------------
+
+st.markdown("""
+<style>
+
+    /* 隐藏右上角的 Streamlit 主菜单（包含部署、源码、设置等） */
+    #MainMenu {visibility: hidden;}
+    /* 隐藏页脚（包含 "Made with Streamlit" 文字） */
+    footer {visibility: hidden;}
+    /* 隐藏顶部的 header（包含部署按钮） */
+    header[data-testid="stHeader"] {display: none;}
+    
+    /* 2. HTML 链接按钮 (Get New Apps) */
+    .neal-btn {
+        font-family: 'Inter', sans-serif;
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        color: #111;
+        font-weight: 600;
+        font-size: 14px;
+        padding: 8px 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.2s;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        white-space: nowrap;
+        text-decoration: none !important;
+        width: 100%;
+        height: 38px; /* 强制与 st.button 高度对齐 */
+    }
+    .neal-btn:hover {
+        background: #f9fafb;
+        border-color: #111;
+        transform: translateY(-1px);
+    }
+    .neal-btn-link { text-decoration: none; width: 100%; display: block; }
+</style>
+""", unsafe_allow_html=True)
+
+
+
+
 # -------------------------------------------------------------
 # --- 1. 多语言配置与资源字典 ---
 # -------------------------------------------------------------
@@ -274,12 +319,36 @@ if "last_review_file" not in st.session_state:
 if "last_review_result" not in st.session_state:
     st.session_state.last_review_result = ""  # 记录最后审查的结果
 
-# --- 语言选择器 ---
-selected_lang_label = st.selectbox(
-    "🌐 Language / 语言 / لغة / Idioma",
-    options=list(LANG_OPTIONS.keys()),
-    index=0
-)
+
+
+
+
+# 创建右上角布局（占满整行，右侧显示按钮/链接）
+col_empty, col_lang, col_more = st.columns([0.7, 0.1, 0.2])
+
+with col_lang:
+    # 仅展示无实际功能的语言切换按钮
+    #st.button("中/英文", key="lang_switch", help="语言切换（暂无实际功能）")
+        # --- 语言选择器 ---
+    selected_lang_label = st.selectbox(
+        "🌐 Language / 语言 / لغة / Idioma",
+        options=list(LANG_OPTIONS.keys()),
+        index=0
+    )
+
+with col_more:
+    # 修复：改用 HTML 链接按钮（替代 webbrowser 方式，兼容 Streamlit 云环境）
+    st.markdown(
+        f"""
+        <a href="https://haowan.streamlit.app/" target="_blank" class="neal-btn-link">
+            <button class="neal-btn">✨ 更多好玩应用</button>
+        </a>
+        """, 
+        unsafe_allow_html=True
+    )
+
+
+
 current_lang_code = LANG_OPTIONS[selected_lang_label]
 T = TRANSLATIONS[current_lang_code]
 
