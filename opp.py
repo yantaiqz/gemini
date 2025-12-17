@@ -422,49 +422,6 @@ def initialize_model(lang_code):
 
 model = initialize_model(current_lang_code)
 
-# -------------------------- 4. 访问计数器 --------------------------
-COUNTER_FILE = "visit_stats.json"
-
-def update_daily_visits():
-    try:
-        today_str = datetime.date.today().isoformat()
-        if "has_counted" in st.session_state:
-            if os.path.exists(COUNTER_FILE):
-                try:
-                    with open(COUNTER_FILE, "r") as f:
-                        return json.load(f).get("count", 0)
-                except:
-                    return 0
-            return 0
-
-        data = {"date": today_str, "count": 0}
-        if os.path.exists(COUNTER_FILE):
-            try:
-                with open(COUNTER_FILE, "r") as f:
-                    file_data = json.load(f)
-                    if file_data.get("date") == today_str:
-                        data = file_data
-            except:
-                pass 
-        
-        data["count"] += 1
-        with open(COUNTER_FILE, "w") as f:
-            json.dump(data, f)
-        
-        st.session_state["has_counted"] = True
-        return data["count"]
-    except Exception:
-        return 0
-
-daily_visits = update_daily_visits()
-visit_text = f"{T['daily_visits']}: {daily_visits}"
-
-st.markdown(f"""
-<div style="text-align: center; color: #64748b; font-size: 0.7rem; margin-top: 10px; padding-bottom: 20px;">
-    {visit_text}
-</div>
-""", unsafe_allow_html=True)
-
 st.markdown('<hr style="border-top: 2px dashed #8c8c8c; background: none;">', unsafe_allow_html=True)
 
 # -------------------------------------------------------------
@@ -551,7 +508,7 @@ if st.session_state.file_review_completed and st.session_state.last_review_resul
     if not any(msg.get("content") == st.session_state.last_review_result for msg in st.session_state.messages):
         st.session_state.messages.append({"role": "assistant", "content": st.session_state.last_review_result})
 
-st.markdown('<hr style="border-top: 2px dashed #8c8c8c; background: none;">', unsafe_allow_html=True)
+# st.markdown('<hr style="border-top: 2px dashed #8c8c8c; background: none;">', unsafe_allow_html=True)
 
 # -------------------------------------------------------------
 # --- 6. 聊天模块与常见问题 ---
@@ -562,7 +519,7 @@ if "messages" not in st.session_state:
         {"role": "assistant", "content": T["welcome"]}
     ]
 
-st.subheader(T["common_q_title"])
+# st.subheader(T["common_q_title"])
 
 cols = st.columns(3)
 prompt_from_button = None
