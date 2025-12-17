@@ -324,14 +324,23 @@ if "last_review_result" not in st.session_state:
 
 
 # 创建右上角布局（占满整行，右侧显示按钮/链接）
-col_empty, col_lang, col_more = st.columns([4, 1, 1])
+col_empty, col_title, col_lang, col_more = st.columns([5, 1,1, 1])
 
+# 第一列：放置标题
+with col_title:
+    # 可选：副标题
+    st.markdown(
+        "<p style='margin: 0; padding: 0; color: #64748b;'> 🌐 Language / 语言 / لغة / Idioma</p>",
+        unsafe_allow_html=True
+    )
+
+    
 with col_lang:
     # 仅展示无实际功能的语言切换按钮
     #st.button("中/英文", key="lang_switch", help="语言切换（暂无实际功能）")
         # --- 语言选择器 ---
     selected_lang_label = st.selectbox(
-        "🌐 Language / 语言 / لغة / Idioma",
+        "",
         options=list(LANG_OPTIONS.keys()),
         index=0
     )
